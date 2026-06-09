@@ -1,0 +1,27 @@
+services:
+  mi-api-fastapi:
+    build: .
+    container_name: contenedor_api_emi
+    ports:
+      - "8080:8000"
+    volumes:
+      - .:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    depends_on:
+      - mi-base-datos
+
+  mi-base-datos:
+    image: postgres:15-alpine
+    container_name: contenedor_db_emi
+    environment:
+      POSTGRES_USER: mi_usuario_postgres
+      POSTGRES_PASSWORD: password_super_secreta
+      POSTGRES_DB: base_datos_desarrollo
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data # <--- 1. LE CONECTAMOS EL VOLUMEN A LA CARPETA DE DATOS DE POSTGRES
+
+# 2. DEFINIMOS EL VOLUMEN ARRIBA O ABAJO DEL TODO (AL MISMO NIVEL DE SERVICES)
+volumes:
+  db_data:
