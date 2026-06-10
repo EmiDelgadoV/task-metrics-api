@@ -23,3 +23,10 @@ class TaskUpdate(BaseModel):
     description: Optional[str] = None
     priority: Optional[str] = None
     completed: Optional[bool] = None
+
+class TaskMetricsResponse(BaseModel):
+    total_tasks: int
+    completed_tasks: int
+    pending_tasks: int
+    completion_percentage: float
+    by_priority: dict 
