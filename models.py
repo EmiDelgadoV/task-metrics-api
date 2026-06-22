@@ -11,3 +11,4 @@ class Task(Base):
     priority = Column(String, default="low") # low, medium, high
     completed = Column(Boolean, default=False)
     created_at = Column(DateTime, default=datetime.utcnow)
+    description = Column(String, nullable=True)  # nullable=True porque es opcional
